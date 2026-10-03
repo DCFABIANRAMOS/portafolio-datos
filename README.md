@@ -1,4 +1,6 @@
-# Portafolio de análisis de datos — Dumar Fabián Castañeda Ramos
+# Portafolio de análisis de datos
+
+Dumar Fabián Castañeda Ramos
 
 Contador público, especialista en Visual Analytics y Big Data. Aquí está el código detrás
 de mi portafolio: las consultas SQL de cada proyecto y el script del modelo predictivo.
@@ -19,11 +21,16 @@ de mi portafolio: las consultas SQL de cada proyecto y el script del modelo pred
 
 ## Contenido
 
-- `consultas/` — las consultas SQL de cada proyecto, en SQLite. Son las mismas que se
+- `consultas/`: las consultas SQL de cada proyecto, en SQLite. Son las mismas que se
   ejecutan en el laboratorio del portafolio.
-- `modelo/riesgo_deterioro.py` — el modelo de predicción de deterioro financiero,
-  reproducible desde el CSV original.
-- `portafolio/` — la página completa, en un solo archivo HTML.
+- `modelo/analisis_riesgo.ipynb`: el cuaderno con la exploración paso a paso, los gráficos
+  y las conclusiones. Es el mejor punto de entrada al proyecto, porque GitHub lo muestra ya
+  ejecutado y no hay que correr nada.
+- `modelo/riesgo_deterioro.py`: el mismo análisis como script, reproducible desde el CSV original.
+- `datos/preparar_datos.py`: convierte los archivos originales de las cinco fuentes en las
+  tablas que consume el laboratorio SQL del portafolio.
+- `requirements.txt`: las librerías necesarias.
+- `portafolio/`: la página completa en un solo archivo HTML, en dos versiones: `portafolio-completa.html` y `portafolio-ligera.html`.
 
 ## Fuentes de datos
 
