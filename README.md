@@ -5,8 +5,9 @@ Dumar Fabián Castañeda Ramos
 Contador público, especialista en Visual Analytics y Big Data. Aquí está el código detrás
 de mi portafolio: las consultas SQL de cada proyecto y el script del modelo predictivo.
 
-**Portafolio en línea:** https://sites.google.com/view/dcfabianramos
-**LinkedIn:** https://www.linkedin.com/in/dcfabianramos
+**Portafolio en línea:** https://sites.google.com/view/dcfabianramos  
+**LinkedIn:** https://www.linkedin.com/in/dcfabianramos  
+**GitHub:** https://github.com/dcfabianramos
 
 ## Proyectos
 
