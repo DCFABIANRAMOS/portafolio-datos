@@ -4,8 +4,6 @@
 *.xls
 *.parquet
 *.zip
-datos/
-data/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
