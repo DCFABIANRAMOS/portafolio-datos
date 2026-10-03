@@ -1,0 +1,11 @@
+# Datos: no se redistribuyen. Ver README para descargarlos.
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.zip
+datos/
+data/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
