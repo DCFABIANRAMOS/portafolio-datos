@@ -10,19 +10,19 @@
 <style>
 :root{
   --bg:#F2F4EF; --surface:#FFFFFF; --ink:#16262E; --muted:#56666B; --line:#D3DAD2;
-  --teal:#0E7C6B; --amber:#C98F0A; --plum:#7A4E8C; --code-bg:#16262E; --code-ink:#E4EEE9; --hl:#F6E7B8;
+  --teal:#0E7C6B; --amber:#C98F0A; --amber-fuerte:#8A6206; --plum:#7A4E8C; --code-bg:#16262E; --code-ink:#E4EEE9; --hl:#F6E7B8;
   --sans:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#11191C; --surface:#18242A; --ink:#E4ECE7; --muted:#9AABAA; --line:#2B3A3F;
-    --teal:#3CC4AA; --amber:#F0C04A; --plum:#C197D6; --code-bg:#0B1113; --code-ink:#DDE8E3; --hl:#3A3417;
+    --teal:#3CC4AA; --amber:#F0C04A; --amber-fuerte:#F0C04A; --plum:#C197D6; --code-bg:#0B1113; --code-ink:#DDE8E3; --hl:#3A3417;
   }
 }
 :root[data-theme="dark"]{
   --bg:#11191C; --surface:#18242A; --ink:#E4ECE7; --muted:#9AABAA; --line:#2B3A3F;
-  --teal:#3CC4AA; --amber:#F0C04A; --plum:#C197D6; --code-bg:#0B1113; --code-ink:#DDE8E3; --hl:#3A3417;
+  --teal:#3CC4AA; --amber:#F0C04A; --amber-fuerte:#F0C04A; --plum:#C197D6; --code-bg:#0B1113; --code-ink:#DDE8E3; --hl:#3A3417;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -87,7 +87,8 @@ section .intro{color:var(--muted);max-width:62ch;margin:0 0 36px}
 .skill.future .meter span{background:var(--amber)}
 
 /* Projects */
-.project{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px;padding:36px 0;border-bottom:1px solid var(--line)}
+.project{display:block;padding:36px 0;border-bottom:1px solid var(--line);overflow:hidden}
+.project > figure.chart{float:right;width:48%;margin:6px 0 24px 36px}
 .project:last-child{border-bottom:0}
 .project h3{font-size:1.5rem;margin:0 0 6px;line-height:1.15}
 .project .src{font-size:.88rem;color:var(--muted);margin:0 0 14px}
@@ -107,10 +108,15 @@ section .intro{color:var(--muted);max-width:62ch;margin:0 0 36px}
 .road li.now{border-top-color:var(--amber)}
 .road li b{display:block}
 .road li span{color:var(--muted)}
-.lab-grid{display:grid;grid-template-columns:minmax(0,1fr) 15rem;gap:24px;align-items:start}
+.lab-grid{display:block}
+.schema{margin-top:26px;columns:3;column-gap:32px}
+.schema .bloque{break-inside:avoid;margin-bottom:26px}
+.schema h5.grupo{break-after:avoid}
+.schema h4{break-after:avoid;break-inside:avoid}
+.schema p{break-inside:avoid}
 .schema{font-size:.88rem}
 .schema h4{margin:0 0 4px;font-family:var(--mono);font-size:.85rem;color:var(--teal)}
-.schema p{margin:0 0 16px;color:var(--muted);font-family:var(--mono);font-size:.76rem;line-height:1.6}
+.schema p{margin:0 0 14px;color:var(--muted);font-family:var(--mono);font-size:.76rem;line-height:1.6}
 
 /* Certs */
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
@@ -122,6 +128,7 @@ section .intro{color:var(--muted);max-width:62ch;margin:0 0 36px}
 .certs td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .certs td.h{text-align:right;white-space:nowrap}
 .certs td.d{white-space:nowrap;color:var(--muted)}
+.certs td.cred{font-family:var(--mono);font-size:.72rem;color:var(--muted);white-space:nowrap}
 .certs tr.big td{font-weight:700}
 .tag{font-size:.78rem;padding:2px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
 
@@ -138,11 +145,14 @@ footer .contact{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
 footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
 
 @media (max-width:860px){
-  .hero,.project,.lab-grid{grid-template-columns:minmax(0,1fr)}
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .schema{columns:1}
+  .project > figure.chart{float:none;width:auto;margin:0 0 20px}
   .skill{grid-template-columns:1fr;gap:6px}
   .skill .hrs{text-align:left}
   .road{grid-template-columns:1fr 1fr}
   .sources{columns:1}
+  .schema{columns:1}
 }
 @media (max-width:600px){
   .certs{overflow:visible}
@@ -155,6 +165,7 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
   .certs td:nth-child(3){grid-column:1;grid-row:3;color:var(--muted)}
   .certs td:nth-child(4){grid-column:1;grid-row:4}
   .certs td.h{grid-column:2;grid-row:3/5;align-self:center}
+  .certs td.cred{grid-column:1/-1;grid-row:5}
 }
 #habilidades,#proyectos,#sql,#formacion,#encurso,#contacto{scroll-margin-top:64px}
 .subgroup{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:32px 0 0;padding-bottom:10px;border-bottom:2px solid var(--ink)}
@@ -168,12 +179,31 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
 .hero .facts{display:grid;grid-template-columns:repeat(2,max-content);gap:18px 36px}
 @media (max-width:480px){.hero .facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 18px}.hero .facts strong{font-size:clamp(1.1rem,5vw,1.3rem)}.hero .facts li{font-size:.85rem}}
 @media (max-width:340px){.hero .facts{grid-template-columns:minmax(0,1fr)}}
-.schema h5.grupo{margin:22px 0 10px;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:6px}
+.schema h5.grupo{margin:0 0 10px;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:6px}
 .schema h5.grupo:first-child{margin-top:0}
 .demo{font-size:.92rem;margin:14px 0 0}
 .demo b{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:2px}
 .soque{border-left:4px solid var(--amber);background:var(--surface);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0 16px;font-size:.95rem}
-.soque b{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:2px}
+.soque b{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber-fuerte);display:block;margin-bottom:2px}
+
+/* Robustez en distintas plataformas */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-wrap:anywhere;word-break:normal}
+pre,code{overflow-wrap:normal}
+.certs td.cred{overflow-wrap:anywhere}
+input,button,textarea,select{font:inherit}
+.console textarea{-webkit-appearance:none;border-radius:0}
+@supports (-webkit-touch-callout:none){
+  .console textarea{font-size:16px}   /* evita el zoom automático de iOS al enfocar */
+}
+@media print{
+  nav.top,.cta,.console,.filters,.road,#sql,#fuentes{display:none!important}
+  body{background:#fff;color:#111;font-size:11pt}
+  section{page-break-inside:avoid;border-top:1px solid #ccc}
+  .project{display:block}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+  .chart{border:1px solid #ddd}
+}
 </style>
 </head>
 <body>
@@ -194,6 +224,7 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
   <div>
     <h1>Dumar Fabian Castañeda Ramos</h1>
     <p class="lead">Contador público especializado en Visual Analytics y Big Data. Convierto datos públicos en respuestas claras con Python, Power BI y Excel, y estoy afianzando SQL.</p>
+    <p style="color:var(--muted);font-size:.95rem;max-width:40ch;margin:-12px 0 24px">Cuatro años en contabilidad y tributaria, y seis antes como técnico en redes. Ese recorrido es el que uso para leer los datos.</p>
     <ul class="facts">
       <li><strong>2 títulos</strong>pregrado y posgrado</li>
       <li><strong><span id="f-certs">40</span> certificados</strong><span id="f-hours">411</span> horas en total</li>
@@ -224,11 +255,16 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
   <p class="intro">Seis análisis cortos con datos públicos, todos descargados de su fuente oficial. Cada gráfico sale de una consulta SQL que puedes abrir y modificar en el laboratorio.</p>
 
   <article class="project">
+    <figure class="chart" style="margin:0">
+      <div id="c-emp"></div>
+      <div class="legend" id="l-emp"></div>
+      <figcaption>Margen neto por macrosector, año de corte 2021 a 2025. Fuente: Supersociedades.</figcaption>
+    </figure>
     <div>
       <h3>¿Qué sectores de Colombia ganan más por cada peso que venden?</h3>
       <p class="src">Fuente: Superintendencia de Sociedades, "10.000 Empresas más Grandes del País", publicado en datos.gov.co con licencia abierta. 50.000 registros: 10.000 empresas en cinco años de corte, 2021 a 2025. Cifras en billones de pesos. En el laboratorio están las 50.000 filas con NIT, CIIU y ciudad.</p>
       <p>Mi proyecto de contador. Calculé margen neto, endeudamiento, ROA y ROE agregando por macrosector y por región, usé <code>LAG()</code> para seguir la caída del sector minero año por año y <code>RANK()</code> para ordenar las regiones.</p>
-      <div class="find">En 2022 el sector minero ganaba 24,6 pesos por cada 100 que vendía; en 2025 solo 7,9. Hoy el más rentable es servicios, con 14,6 %. Comercio mueve el mayor volumen (640,6 billones) y es el que menos deja: 2,6 %. Construcción financia con deuda el 70,2 % de sus activos, casi 12 puntos más que en 2021.</p>
+      <div class="find">En 2022 el sector minero ganaba 24,6 pesos por cada 100 que vendía; en 2025 solo 7,9. Hoy el más rentable es servicios, con 14,6 %. Comercio mueve el mayor volumen (640,6 billones) y es el que menos deja: 2,6 %. Construcción financia con deuda el 70,2 % de sus activos, casi 12 puntos más que en 2021.</div>
       <p class="demo"><b>Demuestra</b>Criterio contable aplicado a datos públicos: sé qué se puede calcular con estas cifras y qué no.</p>
       <div class="soque"><b>Entonces qué</b>Si vendes a crédito a constructoras, pide anticipos o garantías: siete de cada diez pesos de sus activos ya están comprometidos con deuda. Y quien invierta en minería debe asumir que el margen de 2022 no vuelve pronto: lleva tres años cayendo.</div>
       <p class="ev" style="color:var(--muted);font-size:.9rem;margin:0 0 14px">Tres decisiones de criterio: las cifras vienen redondeadas a dos decimales, así que calculo los indicadores sobre las sumas por sector y no empresa por empresa, para que el redondeo no distorsione; comparo regiones solo dentro de 2025, porque la entidad cambió la clasificación regional ese año; y tengo presente que son estados financieros individuales de cada sociedad, no consolidados del grupo, así que las cifras no siempre coinciden con el informe anual de la matriz.</p>
@@ -239,14 +275,14 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
         <button class="btn ghost" data-open="emp_minero">Ver la caída del minero</button>
       </div>
     </div>
-    <figure class="chart" style="margin:0">
-      <div id="c-emp"></div>
-      <div class="legend" id="l-emp"></div>
-      <figcaption>Margen neto por macrosector, año de corte 2021 a 2025. Fuente: Supersociedades.</figcaption>
-    </figure>
   </article>
 
   <article class="project">
+    <figure class="chart" style="margin:0">
+      <div id="c-rie"></div>
+      <div class="legend" id="l-rie"></div>
+      <figcaption>Tasa de deterioro observada en cada décimo de riesgo, sobre los 13.380 pares del periodo de prueba. Fuente: Supersociedades.</figcaption>
+    </figure>
     <div>
       <h3>¿Se puede ver venir el deterioro de una empresa un año antes?</h3>
       <p class="src">Fuente: Supersociedades, los mismos 50.000 registros del proyecto anterior, reorganizados en 26.123 pares de año a año. Análisis en Python con pandas y scikit-learn; los resultados se consultan aquí en SQL.</p>
@@ -261,13 +297,13 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
         <button class="btn ghost" data-open="rie_modelos">Comparar los modelos</button>
       </div>
     </div>
-    <figure class="chart" style="margin:0">
-      <div id="c-rie"></div>
-      <div class="legend" id="l-rie"></div>
-      <figcaption>Tasa de deterioro observada en cada décimo de riesgo, sobre los 13.380 pares del periodo de prueba. Fuente: Supersociedades.</figcaption>
-    </figure>
   </article>
   <article class="project">
+    <figure class="chart" style="margin:0">
+      <div id="c-pib"></div>
+      <div class="legend" id="l-pib"></div>
+      <figcaption>PIB per cápita en USD corrientes. Fuente: Banco Mundial.</figcaption>
+    </figure>
     <div>
       <h3>¿Qué tanto creció el PIB por habitante en Latinoamérica después de la pandemia?</h3>
       <p class="src">Fuente: Banco Mundial, World Development Indicators, descarga oficial de data.worldbank.org. Dólares corrientes, 2021 a 2025; en el laboratorio está la serie completa: nueve indicadores para 265 países desde 1960.</p>
@@ -278,14 +314,13 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
       <pre id="q-pib"></pre>
       <button class="btn ghost" data-open="pib">Abrir en el laboratorio</button>
     </div>
-    <figure class="chart" style="margin:0">
-      <div id="c-pib"></div>
-      <div class="legend" id="l-pib"></div>
-      <figcaption>PIB per cápita en USD corrientes. Fuente: Banco Mundial.</figcaption>
-    </figure>
   </article>
 
   <article class="project">
+    <figure class="chart" style="margin:0">
+      <div id="c-met"></div>
+      <figcaption>Caídas observadas por periodo de 50 años (2000 a 2013 es un periodo incompleto). Fuente: NASA.</figcaption>
+    </figure>
     <div>
       <h3>Meteoritos que alguien vio caer</h3>
       <p class="src">Fuente: Meteorite Landings, de NASA Open Data Portal y The Meteoritical Society; archivo oficial de data.nasa.gov, comparado registro por registro con una copia independiente sin encontrar diferencias. 45.716 registros; el proyecto usa los 1.107 marcados como caída observada, y el laboratorio los tiene todos.</p>
@@ -296,13 +331,14 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
       <pre id="q-met"></pre>
       <button class="btn ghost" data-open="met">Abrir en el laboratorio</button>
     </div>
-    <figure class="chart" style="margin:0">
-      <div id="c-met"></div>
-      <figcaption>Caídas observadas por periodo de 50 años (2000 a 2013 es un periodo incompleto). Fuente: NASA.</figcaption>
-    </figure>
   </article>
 
   <article class="project">
+    <figure class="chart" style="margin:0">
+      <div id="c-iris"></div>
+      <div class="legend" id="l-iris"></div>
+      <figcaption>Cada punto es una flor. Eje X: largo del pétalo (cm); eje Y: ancho del pétalo (cm). Fuente: UCI.</figcaption>
+    </figure>
     <div>
       <h3>Clasificar flores con cuatro medidas</h3>
       <p class="src">Fuente: Iris (Fisher, 1936), descarga oficial del UCI Machine Learning Repository. Uso la versión corregida (bezdekIris.data), porque la documentación del propio repositorio advierte que las muestras 35 y 38 del archivo principal tienen valores equivocados. 150 flores, 3 especies, licencia CC BY 4.0.</p>
@@ -313,14 +349,14 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
       <pre id="q-iris"></pre>
       <button class="btn ghost" data-open="iris">Abrir en el laboratorio</button>
     </div>
-    <figure class="chart" style="margin:0">
-      <div id="c-iris"></div>
-      <div class="legend" id="l-iris"></div>
-      <figcaption>Cada punto es una flor. Eje X: largo del pétalo (cm); eje Y: ancho del pétalo (cm). Fuente: UCI.</figcaption>
-    </figure>
   </article>
 
   <article class="project">
+    <figure class="chart" style="margin:0">
+      <div id="c-ret"></div>
+      <div class="legend" id="l-ret"></div>
+      <figcaption>Concentración de ventas: qué porcentaje del total acumulan los clientes ordenados de mayor a menor. Fuente: UCI, Online Retail II.</figcaption>
+    </figure>
     <div>
       <h3>¿De quién depende de verdad una tienda en línea?</h3>
       <p class="src">Fuente: Online Retail II, descarga oficial del UCI Machine Learning Repository. 1.067.371 transacciones reales de una tienda minorista británica entre diciembre de 2009 y diciembre de 2011, con 43 países y 5.878 clientes identificados.</p>
@@ -335,17 +371,12 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
         <button class="btn ghost" data-open="ret_mes">Ver la estacionalidad</button>
       </div>
     </div>
-    <figure class="chart" style="margin:0">
-      <div id="c-ret"></div>
-      <div class="legend" id="l-ret"></div>
-      <figcaption>Concentración de ventas: qué porcentaje del total acumulan los clientes ordenados de mayor a menor. Fuente: UCI, Online Retail II.</figcaption>
-    </figure>
   </article>
 </section>
 
 <section id="sql">
   <h2>Laboratorio SQL</h2>
-  <p class="intro">SQL es la habilidad que estoy construyendo ahora. Esta consola ejecuta SQLite real en tu navegador, sobre todas las tablas de los cinco proyectos y sus tablas de apoyo. Es de solo lectura, así que puedes experimentar sin romper nada. Las tablas están agrupadas por proyecto en el panel de la derecha. Escribe tu consulta o prueba uno de los ejemplos; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> también ejecuta.</p>
+  <p class="intro">SQL es la habilidad que estoy construyendo ahora. Esta consola ejecuta SQLite real en tu navegador, sobre todas las tablas de los seis proyectos y sus tablas de apoyo. Es de solo lectura, así que puedes experimentar sin romper nada. Debajo están las tablas, agrupadas por proyecto. Escribe tu consulta o prueba uno de los ejemplos; <kbd>Ctrl</kbd> + <kbd>Enter</kbd> también ejecuta.</p>
   <div class="lab-grid">
     <div class="console">
       <div class="bar"><span><span class="dot"></span><span id="lab-tablas">laboratorio · SQLite</span></span><span id="lab-meta"></span></div>
@@ -369,7 +400,7 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
   <p class="intro">Todos los cursos terminados, agrupados por área y, dentro de cada una, del más reciente al más antiguo. Filtra por área para ver la ruta de cada habilidad.</p>
   <div class="filters" id="filters" role="group" aria-label="Filtrar por área"></div>
   <div class="certs"><table>
-    <thead><tr><th>Fecha</th><th>Curso</th><th>Entidad</th><th>Área</th><th style="text-align:right">Horas</th></tr></thead>
+    <thead><tr><th>Fecha</th><th>Curso</th><th>Entidad</th><th>Área</th><th>Credencial</th><th style="text-align:right">Horas</th></tr></thead>
     <tbody id="cert-body"></tbody>
   </table></div>
 </section>
@@ -437,10 +468,11 @@ footer small{display:block;color:var(--muted);margin-top:36px;max-width:70ch}
   <div class="contact">
     <a class="btn" target="_blank" href="mailto:dumarfabiancastanedaramos@gmail.com">Escribir un correo</a>
     <a class="btn ghost" href="https://www.linkedin.com/in/dcfabianramos" target="_blank" rel="noopener">Ver mi LinkedIn</a>
-    <a class="btn ghost" href="https://github.com/DCFABIANRAMOS" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn ghost" href="https://github.com/dcfabianramos" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn ghost" href="https://drive.google.com/file/d/1a-JbqHrXm8ALH33p5ew4Smd-tz8cqwsL/view?usp=sharing" target="_blank" rel="noopener">Descargar hoja de vida</a>
   </div>
   <p style="margin-top:14px;color:var(--muted);font-size:.95rem">dumarfabiancastanedaramos@gmail.com</p>
-  <small>Datos: Superintendencia de Sociedades vía datos.gov.co, Banco Mundial (World Development Indicators), NASA Open Data Portal, UCI Machine Learning Repository y Kaggle (Sample Superstore, datos ficticios de Tableau con fines educativos). Cada fuente se actualiza por su cuenta, así que las cifras corresponden a la descarga que hice y pueden cambiar en publicaciones posteriores.</small>
+  <small>Datos: Superintendencia de Sociedades vía datos.gov.co, Banco Mundial (World Development Indicators), UCI Machine Learning Repository (Online Retail II e Iris) y NASA Open Data Portal. Cada fuente se actualiza por su cuenta, así que las cifras corresponden a la descarga que hice y pueden cambiar en publicaciones posteriores.</small>
 </footer>
 </div>
 
@@ -517,13 +549,14 @@ $('#skills').innerHTML = `<div class="skill"><h3>Criterio contable y financiero<
 /* ---------- Certs table ---------- */
 const areas=['Todas','Datos','IA','Calidad y seguridad','Negocio','Marketing digital'];
 let cur='Todas';
+const SERIE={"Manejo de Pruebas de Software": "SENA 9540002904124CC1121937716C", "Curso de Programación en Python (24 nov 2025 a 19 jul 2026)": "UNIR 889533eb-b29d-491f-8ce5-8cea2e0b61c9", "Ciberseguridad y Ethical Hacking": "c96e1b57-a78f-4cff-b56f-8efe3848475c", "Peritaje e Informática Forense": "dac1b59b-9a5c-47d5-8376-7bd643402aff", "Colaboración y Comunicación Estratégica": "OA-2025-0929001784512", "Ecommerce para pymes: vende más online": "OA-2025-0929001783635", "Google: Inteligencia Artificial y productividad": "OA-2025-0828001649211", "Introducción a la Ciencia de Datos": "OA-2025-0828001649079", "Internet de las Cosas (videos de MIT Professional Education)": "OA-2025-0927001776711", "Introducción a la IA Generativa (videos de MIT Professional Education)": "OA-2025-0927001776712", "Introducción al comportamiento del consumidor": "OA-2025-0927001776611", "Liderazgo en el entorno digital": "OA-2025-0927001776404", "Negociación": "OA-2025-0927001776286", "Prompting responsable: maximiza la IA en tu negocio": "OA-2025-0927001776085", "Transformación Digital (videos de MIT Professional Education)": "OA-2025-0925001769121", "Comunicación Efectiva": "OA-2025-0929001784141", "Copilot: domina la IA en Microsoft 365": "OA-2025-0929001783968", "Copilot": "OA-2025-0929001784142", "Excel": "OA-2025-0929001783636", "Fundamentos de ChatGPT": "OA-2025-0927001776830", "Gestión de Proyectos y Fundamentos de metodología Agile": "OA-2025-0927001776829", "Gestión Efectiva de proyectos y equipos": "OA-2025-0927001776831", "Liderazgo": "OA-2025-0927001776502", "Marketing automation": "OA-2025-0927001776403", "Pensamiento crítico y resolución de problemas": "OA-2025-0927001776288", "Pensamiento estratégico y mentalidad estratégica": "OA-2025-0927001776287", "Power BI": "OA-2025-0927001776083", "Publicidad en redes sociales": "OA-2025-0927001776084", "Cursor con Python: desarrollo inteligente con IA": "OA-2025-0929001783969", "Python": "OA-2025-0927001775997", "Reglas de la IA: cómo usarla sin correr riesgos legales": "OA-2025-0925001769270", "SEO y content marketing": "OA-2025-0925001769269"};
 function renderCerts(){
   const byDate=(a,b)=>b.fecha.localeCompare(a.fecha);
-  const row=c=>{const d=new Date(c.fecha+'T12:00:00');return `<tr class="${c.big?'big':''}"><td class="d">${d.toLocaleDateString('es-CO',{day:'numeric',month:'short',year:'numeric'})}</td><td>${esc(c.curso)}</td><td>${esc(c.entidad)}</td><td><span class="tag">${c.area}</span></td><td class="h">${c.horas?c.horas+' h':'Programa'}</td></tr>`};
+  const row=c=>{const d=new Date(c.fecha+'T12:00:00');return `<tr class="${c.big?'big':''}"><td class="d">${d.toLocaleDateString('es-CO',{day:'numeric',month:'short',year:'numeric'})}</td><td>${esc(c.curso)}</td><td>${esc(c.entidad)}</td><td><span class="tag">${c.area}</span></td><td class="cred">${SERIE[c.curso]?esc(SERIE[c.curso]):'<span style="opacity:.55">sin código</span>'}</td><td class="h">${c.horas?c.horas+' h':'Programa'}</td></tr>`};
   if(cur==='Todas'){
     /* Vista agrupada por área, en el mismo orden de los filtros; dentro de cada grupo, del más reciente al más antiguo */
     $('#cert-body').innerHTML=areas.filter(a=>a!=='Todas').map(a=>{const g=C.filter(c=>c.area===a).sort(byDate);
-      return `<tr class="grp"><th colspan="5" scope="rowgroup">${a} <span>· ${g.length} ${g.length===1?'curso':'cursos'} · ${hoursBy(a)} h</span></th></tr>`+g.map(row).join('');}).join('');
+      return `<tr class="grp"><th colspan="6" scope="rowgroup">${a} <span>· ${g.length} ${g.length===1?'curso':'cursos'} · ${hoursBy(a)} h</span></th></tr>`+g.map(row).join('');}).join('');
   }else{
     $('#cert-body').innerHTML=C.filter(c=>c.area===cur).sort(byDate).map(row).join('');
   }
@@ -540,7 +573,7 @@ const SRC=[
 ['World Bank Open Data','https://data.worldbank.org/','Nueve indicadores (WDI) para 265 países, usados en el proyecto regional y en el laboratorio.',true],
 ['Datos Abiertos Colombia','https://www.datos.gov.co/','Supersociedades: 50.000 registros de las 10.000 empresas más grandes en cinco años, usado en el proyecto financiero.',true]
 ];
-$('#sources').innerHTML=SRC.map(s=>`<div><b><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></b><p>${s[2]}</p></div>`).join('')+`<div style="break-inside:avoid;padding:12px 0"><b>Lo que sigue</b><p>Un modelo de predicción de quiebra empresarial con los datos de Supersociedades.</p></div>`;
+$('#sources').innerHTML=SRC.map(s=>`<div><b><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></b><p>${s[2]}</p></div>`).join('')+`<div style="break-inside:avoid;padding:12px 0"><b>Lo que sigue</b><p>Cruzar Supersociedades con los estados financieros completos del SIREM, que sí traen activos y pasivos corrientes, para que el modelo de riesgo use indicadores de liquidez.</p></div>`;
 
 /* ---------- Queries ---------- */
 const Q={
@@ -832,12 +865,13 @@ const TYPES={
  iris:'largo_sepalo REAL, ancho_sepalo REAL, largo_petalo REAL, ancho_petalo REAL, especie TEXT'};
 $('#lab-tablas').textContent=`laboratorio · SQLite con ${Object.keys(SCHEMA).length} tablas`;
 const GRUPOS=[['Empresas de Colombia · Supersociedades',['sociedades','financieros','empresas_sector','empresas_region','empresas_top','actividades','empresas_supervisor','empresas_ciudad','empresas_dist']],
+ ['Riesgo de deterioro · modelo propio',['riesgo_deciles','riesgo_modelos','riesgo_perfil','riesgo_casos']],
  ['Economía mundial · Banco Mundial',['economia','paises_mundo','indicadores']],
- ['Ventas de una tienda · Kaggle',['ventas','productos','clientes','descuentos','envios']],
+ ['Tienda en línea · UCI Online Retail II',['retail_mes','retail_pais','retail_clientes','retail_productos']],
  ['Meteoritos · NASA',['meteoritos','meteoritos_resumen']],
  ['Flores · UCI',['iris']]];
 $('#schema').innerHTML=GRUPOS.map(([g,ts])=>{const hay=ts.filter(t=>SCHEMA[t]); if(!hay.length) return '';
- return `<h5 class="grupo">${g}</h5>`+hay.map(t=>`<h4>${t} <span style="color:var(--muted);font-weight:400">(${fmt(D[t].length)} filas)</span></h4><p>${SCHEMA[t]}</p>`).join('');}).join('');
+ return `<div class="bloque"><h5 class="grupo">${g}</h5>`+hay.map(t=>`<h4>${t} <span style="color:var(--muted);font-weight:400">(${fmt(D[t].length)} filas)</span></h4><p>${SCHEMA[t]}</p>`).join('')+`</div>`;}).join('');
 let db=null, failed=false;
 const loading='<div class="status">Cargando el motor SQL…</div>';
 function run(sql,out,meta){
@@ -853,10 +887,10 @@ function run(sql,out,meta){
     const r=res[res.length-1], cols=r.columns, show=r.values.slice(0,200);
     out.innerHTML=`<table><thead><tr>${cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${show.map(row=>`<tr>${row.map((v,ci)=>{const n=typeof v==='number';const yr=/^(anio|año|ano|year|periodo|decada)/i.test(cols[ci]);return `<td class="${n||v==null?'num':''}">${v==null?'—':esc(n?(yr?String(v):fmt(v,2)):v)}</td>`}).join('')}</tr>`).join('')}</tbody></table><div class="status">${fmt(r.values.length)} ${r.values.length===1?'fila':'filas'}${r.values.length>200?' (mostrando 200)':''} en ${ms} ms</div>`;
     if(meta) meta.textContent=`${fmt(r.values.length)} ${r.values.length===1?'fila':'filas'}`;
-  }catch(e){ out.innerHTML=`<div class="err">Error en la consulta: ${esc(e.message)}\nRevisa los nombres de tablas y columnas en el panel de la derecha.</div>`; if(meta)meta.textContent='error'; }
+  }catch(e){ out.innerHTML=`<div class="err">Error en la consulta: ${esc(e.message)}\nRevisa los nombres de tablas y columnas en la lista de abajo.</div>`; if(meta)meta.textContent='error'; }
 }
-const hs=$('#hero-sql'); hs.value=Q.pib;
-const ls=$('#lab-sql'); ls.value=Q.ven;
+const hs=$('#hero-sql'); hs.value=Q.pib||'SELECT 1';
+const ls=$('#lab-sql'); ls.value=Q.emp;
 const heroRun=()=>run(hs.value,$('#hero-out'));
 const labRun=()=>run(ls.value,$('#lab-out'),$('#lab-meta'));
 $('#hero-run').onclick=heroRun;
@@ -864,9 +898,9 @@ hs.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.
 const EX=[['Riesgo por décimos','rie_deciles'],['Comparar modelos','rie_modelos'],['Perfil de riesgo','rie_perfil'],['Casos reales de deterioro','rie_casos'],['Concentración de clientes','ret_concentracion'],['Estacionalidad y LAG','ret_mes'],['Devoluciones por país','ret_devoluciones'],['Productos más vendidos','ret_productos'],['Mejores clientes','ret_clientes'],['Sectores de Colombia','emp'],['Actividades más rentables (CIIU)','emp_ciiu'],['Empresas con pérdidas','emp_perdidas'],['Por supervisor','emp_supervisor'],['Mediana de ingresos','emp_mediana'],['Buscar una empresa','emp_buscar'],['Caída del minero (LAG)','emp_minero'],['Ranking regional (RANK)','emp_region'],['Las 10 de mayor margen','emp_top'],['PIB con JOIN','pib'],['Colombia en el mundo (RANK)','mundo_rank'],['Inflación más alta','mundo_inflacion'],['Colombia año a año','mundo_colombia'],['Qué mide cada indicador','indicadores'],['Pares de la región','mundo_pares'],['Deuda frente a tributos','mundo_fiscal'],['Vistas caer vs halladas','met_hallazgo'],['Meteoritos por periodo','met'],['Los más pesados','met2'],['Iris por especie','iris']];
 $('#lab-examples').insertAdjacentHTML('beforeend',EX.map(x=>`<button class="ex" data-q="${x[1]}">${x[0]}</button>`).join(''));
 $('#lab-run').onclick=labRun;
-$('#lab-examples').addEventListener('click',e=>{const b=e.target.closest('.ex');if(!b)return;ls.value=Q[b.dataset.q];labRun();});
+$('#lab-examples').addEventListener('click',e=>{const b=e.target.closest('.ex');if(!b)return;const q=Q[b.dataset.q];if(!q){$('#lab-out').innerHTML='<div class="err">Ese ejemplo ya no está disponible. Prueba otro o escribe tu propia consulta.</div>';return;}ls.value=q;labRun();});
 ls.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();labRun();}});
-document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{ls.value=Q[b.dataset.open];labRun();window.__jump($('#sql'));ls.focus({preventScroll:true});});
+document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{const q=Q[b.dataset.open];if(!q){$('#lab-out').innerHTML='<div class="err">Esa consulta ya no está disponible. Prueba un ejemplo del laboratorio.</div>';}else{ls.value=q;labRun();}window.__jump($('#sql'));ls.focus({preventScroll:true});});
 $('#hero-out').innerHTML=loading; $('#lab-out').innerHTML=loading;
 (async function(){
   try{
