@@ -31,7 +31,7 @@ de mi portafolio: las consultas SQL de cada proyecto y el script del modelo pred
 - `datos/preparar_datos.py`: convierte los archivos originales de las cinco fuentes en las
   tablas que consume el laboratorio SQL del portafolio.
 - `requirements.txt`: las librerías necesarias.
-- `portafolio/`: la página completa en un solo archivo HTML, en dos versiones: `portafolio-completa.html` y `portafolio-ligera.html`.
+- `portafolio/portafolio-completa.html`: la página completa, en un solo archivo HTML.
 - `index.html`: la misma página, en la raíz, para que GitHub Pages la publique en
   https://dcfabianramos.github.io/portafolio-datos
 
